@@ -1,6 +1,6 @@
 import ceylon.test { assertEquals }
 import tictactoe { Game, Choice, available }
-import tictactoe.internal { Matrix }
+import tictactoe.internal { Matrix, GameImpl }
 " 
  Matrix 1:
 			_ _ _
@@ -27,7 +27,8 @@ Matrix matrix3 = Matrix();
 
 
 void testPositionAvailable() {
-	Game game = Game( matrix1 );
+	//Com a implementacao do conceito de _friend_ somente o modulo de teste vai ter acesso a esta implementacao.
+	Game game = GameImpl( matrix1 );
 	
 	value choice = Choice { 
 		column = 0; 
@@ -38,7 +39,8 @@ void testPositionAvailable() {
 }
 
 void testPositionUnavailable() {
-	Game game = Game( matrix2 );
+	//Com a implementacao do conceito de _friend_ somente o modulo de teste vai ter acesso a esta implementacao.
+	Game game = GameImpl( matrix2 );
 	
 	value choice = Choice { 
 		column = 1; 
@@ -49,7 +51,8 @@ void testPositionUnavailable() {
 }
 
 void testNoAvailables() {
-	Game game = Game( matrix3 );
+	//Com a implementacao do conceito de _friend_ somente o modulo de teste vai ter acesso a esta implementacao.
+	Game game = GameImpl( matrix3 );
 	assertEquals(empty, game.getAvailables());
 }
 

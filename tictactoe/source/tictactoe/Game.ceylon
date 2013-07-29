@@ -1,37 +1,30 @@
-import tictactoe.internal { Matrix }
+import tictactoe.internal { GameImpl }
 "Responsável pelas regras do jogo, utilizada para interação com as regras do jogo, tais como:
  
  * Checar se um ponto encontra-se disponível
  * Checar se o jogo chegou ao fim
  * Informar quem venceu ou se houve empate
- * Marcar um ponto especifico para um jogador
+ * Marcar uma escolha específica para um jogador
  "
 by("Diego Coronel")
-shared class Game( matrix = Matrix() ) {
-	
-	Matrix matrix;
+shared interface Game {
 	
 	"Verifica se a escolha encontra-se disponível"
-	shared Boolean isAvailable(Choice choice) {
-		return matrix.isAvailable( choice );
-	}
+	shared formal Boolean isAvailable(Choice choice);
 	
-	shared [Choice*] getAvailables() { 
-		return matrix.getAvailables(); 
-	}
+	"Recuperar todas as posições que ainda estão disponíveis"
+	shared formal [Choice*] getAvailables();
 	
-	shared void markAs_X( Choice choice ) {
-		"Apenas escolhas disponíveis são aceitas."
-		assert( isAvailable(choice) );
-				matrix.mark(choice, unavailableBy_X);
-	}
+	"Marca uma posição para o jogado _X_"
+	shared formal void markAs_X( Choice choice );
 	
-	shared void markAs_O( Choice choice ) {
-		"Apenas escolhas disponíveis são aceitas."
-		assert( isAvailable(choice) );
-		
-		matrix.mark(choice, unavailableBy_O);
-	}
+	"Marca uma posição para o jogado _O_"
+	shared formal void markAs_O( Choice choice );
+}
+
+"Retorna uma instância para um novo jogo"
+shared Game newGame() {
+	return GameImpl();
 }
 
 "Determina a disponibilidade de uma posicao"
