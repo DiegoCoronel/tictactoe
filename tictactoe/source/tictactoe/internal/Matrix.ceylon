@@ -43,15 +43,11 @@ shared class Matrix(board = newBoard ) {
 	
 	"Retorna todas as escolhas disponíveis"
 	shared [Choice*] getAvailables() {
-		variable [Choice*] choices = [];
-		for( i in 0..2 ) {
-			assert (exists line = board[i]);
-			for( j in 0..2 ) {
-				if( exists column = line[j], column == available) {
-					choices = [Choice(j,i), *choices];
-				}
-			}
-		}
-		
-		return choices.reversed;			}
+		return [
+			for( i in 0..2 ) 
+				for( j in 0..2 )
+					if( exists line = board[i], exists column = line[j], column == available)
+						Choice(j,i)
+		];
+	}
 }
