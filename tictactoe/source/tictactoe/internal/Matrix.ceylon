@@ -50,4 +50,10 @@ shared class Matrix(board = newBoard ) {
 						Choice(j,i)
 		];
 	}
+
+	"Retorna o tabuleiro atual do jogo"
+    shared Board getBoard() {
+		return board;
+	}
+
 }

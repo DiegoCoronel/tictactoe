@@ -20,12 +20,32 @@ shared interface Game {
 	
 	"Marca uma posição para o jogado _O_"
 	shared formal void markAs_O( Choice choice );
+
+    "Retorna o estado corrente do jogo"
+	shared formal Status getStatus();
 }
 
 "Retorna uma instância para um novo jogo"
 shared Game newGame() {
 	return GameImpl();
 }
+
+
+"Retorna o Estado atual do jogo"
+shared interface Status of draw | wonBy_O | wonBy_X | running{}
+
+"Informa se o jogo terminou empatado"
+shared object draw satisfies Status{}
+
+"Informa se o jogador _O_ foi o vencedor"
+shared object wonBy_O satisfies Status{}
+
+"Informa se o jogador _X_ foi o vencedor"
+shared object wonBy_X satisfies Status{}
+
+"Informa se jogo continua em andamento"
+shared object running satisfies Status{}
+
 
 "Determina a disponibilidade de uma posicao"
 shared interface Availability of available | unavailableBy_O | unavailableBy_X {}
