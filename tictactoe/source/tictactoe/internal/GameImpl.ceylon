@@ -33,7 +33,7 @@ shared class GameImpl( matrix = Matrix() ) satisfies Game {
 
 	void updateStatus( Availability lastPlayed ) {
 		for( line in getVictoryRules() ) {
-			if( line.containsEvery({lastPlayed}) ) {
+			if( {Position(lastPlayed)}.containsEvery(line) ) {
 				status = lastPlayed == unavailableBy_O then wonBy_O else wonBy_X;
 				break;
 			}
@@ -48,7 +48,7 @@ shared class GameImpl( matrix = Matrix() ) satisfies Game {
 	shared actual Status getStatus() => status;
 
 	"Regras do jogo"
-	[[Availability, Availability, Availability]*] getVictoryRules() {
+	[[Position, Position, Position]*] getVictoryRules() {
 		Board board = matrix.getBoard();
 		
 		return [

@@ -1,9 +1,9 @@
-import tictactoe { Availability, Choice }
+import tictactoe { Choice }
 	
 "Como isso poderia ser melhorado usando os recursos do ceylon ?"
-[Availability, Availability, Availability] makeNewLine(Board board, Choice choice, Availability availability) {
+[Position, Position, Position] makeNewLine(Board board, Choice choice, Position availability) {
 	assert( exists currentLine = board[choice.line] );
-	[Availability, Availability, Availability ] newColumns;
+	[Position, Position, Position ] newColumns;
 		
 	if( choice.column == 0 ) {
 		newColumns = [ availability, currentLine[1], currentLine[2] ];
@@ -16,7 +16,7 @@ import tictactoe { Availability, Choice }
 }
 
 "Como isso poderia ser melhorado usando os recursos do ceylon ?"	
-Board makeNewBoard(Board board, Choice choice, [Availability, Availability, Availability] newLine) {
+Board makeNewBoard(Board board, Choice choice, [Position, Position, Position] newLine) {
 	variable value newBoard = board;
 	if( choice.line == 0 ) {
 		newBoard = [newLine, board[1], board[2]];
