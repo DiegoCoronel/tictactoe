@@ -1,5 +1,5 @@
 import ceylon.test { assertEquals }
-import tictactoe { Game, Choice, available, unavailableBy_O, unavailableBy_X, wonBy_X, wonBy_O }
+import tictactoe { Game, Choice, available, unavailableBy_O, unavailableBy_X, wonBy_X, wonBy_O, newGame, draw }
 import tictactoe.internal { Matrix, GameImpl, Position }
 
 void testPositionAvailable() {
@@ -72,6 +72,26 @@ void testPlayerOWon() {
 	game.markAs_O(Choice(0,2));
 
 	assertEquals(wonBy_O, game.getStatus());
+}
+
+"Bug encontrado enquanto tentava fazer a tela em Swing"
+void testMarkFull() {
+	"  X X 0
+	   0 0 X
+	   X 0 X
+	"
+	Game game = newGame();
+	game.markAs_X(Choice(0,0));
+	game.markAs_O(Choice(1,0));
+	game.markAs_X(Choice(2,0));
+	game.markAs_O(Choice(1,1));
+	game.markAs_X(Choice(0,1));
+	game.markAs_O(Choice(2,1));
+	game.markAs_X(Choice(1,2));
+	game.markAs_O(Choice(0,2));
+	game.markAs_X(Choice(2,2));
+
+	assertEquals(draw, game.getStatus());
 }
 
 Matrix makeMatrix2() {
