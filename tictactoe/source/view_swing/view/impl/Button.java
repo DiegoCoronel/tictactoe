@@ -1,5 +1,7 @@
 package view_swing.view.impl;
 
+import java.awt.Font;
+
 import javax.swing.JButton;
 
 public class Button extends JButton {
@@ -10,6 +12,10 @@ public class Button extends JButton {
 
 	public Button( int line, int column ) {
 		super("");
+		
+		Font f = new Font("Arial", Font.PLAIN, 48);
+		setFont(f);
+		
 		this.line = line;
 		this.column = column;
 	}
