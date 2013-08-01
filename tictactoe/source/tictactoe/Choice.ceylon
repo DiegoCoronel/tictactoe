@@ -1,7 +1,8 @@
 "Representa uma escolha no tabuleiro"
 shared class Choice(line, column) {
-	shared Integer column;
+
 	shared Integer line;
+	shared Integer column;
 	
 	assert( 0 <= column <= 2 );
 	assert( 0 <= line <= 2 );

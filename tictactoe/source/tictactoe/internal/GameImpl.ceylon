@@ -3,9 +3,14 @@ import tictactoe { Choice, unavailableBy_X, unavailableBy_O, Game, Status, runni
 "Implementation of Game Rules defined by [[Game]]"
 shared class GameImpl( matrix = Matrix() ) satisfies Game {
 	
+	"A matrix representa o tabuleiro do jogo"
 	Matrix matrix;
+
+	"Todo jogo começa com estado 'running' que deve ser modificado
+	 para os demais estados conforme as regras de vitória ou empate.
+	 Após ser modificado o estado o jogo não pode mais ser manipulado."
 	variable Status status = running;
-	
+
 	shared actual Boolean isAvailable(Choice choice) {
 		return matrix.isAvailable( choice );
 	}
@@ -22,6 +27,7 @@ shared class GameImpl( matrix = Matrix() ) satisfies Game {
 		mark( choice, unavailableBy_O );
 	}
 
+	"Marca no tabuleiro a escolha do jogado se a mesma estiver disponível"
 	void mark(Choice choice, Availability player) {
 	    "Apenas escolhas disponíveis são aceitas. E mesmo assim se o jogo estiver me andamento."
 		assert( isAvailable(choice), status == running );
@@ -31,6 +37,7 @@ shared class GameImpl( matrix = Matrix() ) satisfies Game {
         updateStatus(player);
 	}
 
+	"Atualiza estado do jogando checando a cada jogada se o mesmo chegou ao fim"
 	void updateStatus( Availability lastPlayed ) {
 		for( line in getVictoryRules() ) {
 			if( {Position(lastPlayed)}.containsEvery(line) ) {
@@ -47,13 +54,15 @@ shared class GameImpl( matrix = Matrix() ) satisfies Game {
 
 	shared actual Status getStatus() => status;
 
-	"Regras do jogo"
+	"Regras do jogo, determina as condições de vitória"
 	[[Position, Position, Position]*] getVictoryRules() {
 		Board board = matrix.getBoard();
 		
 		return [
 			//Horizontal
-			board[0], board[1], board[2],
+			board[0], 
+			board[1], 
+			board[2],
 
 			//Vertical
 			[board[0][0], board[1][0], board[2][0]],

@@ -1,7 +1,7 @@
 import tictactoe.internal { GameImpl }
 "Responsável pelas regras do jogo, utilizada para interação com as regras do jogo, tais como:
  
- * Checar se um ponto encontra-se disponível
+ * Checar se uma escolha encontra-se disponível
  * Checar se o jogo chegou ao fim
  * Informar quem venceu ou se houve empate
  * Marcar uma escolha específica para um jogador
