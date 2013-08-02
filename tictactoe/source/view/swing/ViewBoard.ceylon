@@ -1,6 +1,6 @@
 import javax.swing { JFrame { exitOnClose = \iEXIT_ON_CLOSE }, JOptionPane }
 import tictactoe { Choice }
-import java.awt { GridLayout }
+import java.awt { GridLayout, Dimension, Toolkit { defaultToolkit = defaultToolkit} }
 import ceylon.collection { LinkedList }
 import view { OnClickListener, View }
 
@@ -25,7 +25,15 @@ shared class ViewBoard() extends JFrame("TicTacToe - Almost in Ceylon way") sati
 		}
 		
 		setVisible(true);
+		centerWindow();
 		defaultCloseOperation = exitOnClose;
+	}
+
+	void centerWindow() {
+		Dimension dimension = defaultToolkit.screenSize;
+    	Float x = ((dimension.width - width) / 2);
+    	Float y = ((dimension.height - height) / 2);
+    	setLocation(x.integer, y.integer);
 	}
 
 	shared actual void showMessage( String message ) {
