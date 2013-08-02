@@ -1,6 +1,6 @@
 import tictactoe { Availability, available, Choice }
 
-"Acredito que seja um bug no Ceylon, mas não consegui representar os tipos da tupla com uma interface"
+"Workaround: https://github.com/ceylon/ceylon-compiler/issues/1225"
 shared class Position( availability ) {
 
 	"Mantem a informação de ocupação de uma posição"

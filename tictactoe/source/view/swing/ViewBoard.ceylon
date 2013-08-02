@@ -5,7 +5,7 @@ import ceylon.collection { LinkedList }
 import view { OnClickListener, View }
 
 "Implementação da view"
-shared class ViewBoard() extends JFrame("TicTacToe - Almost in Ceylon way") satisfies View {
+shared class ViewBoard() extends JFrame("TicTacToe") satisfies View {
 
 	LinkedList<Button> buttons = LinkedList<Button>(); 
 
