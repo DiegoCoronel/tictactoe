@@ -1,6 +1,6 @@
 import ceylon.test { assertEquals, fail, assertTrue }
 import tictactoe { Game, Choice, available, unavailableBy_O, unavailableBy_X, wonBy_X, wonBy_O, newGame, draw }
-import tictactoe.internal { Matrix, GameImpl, Position }
+import tictactoe.internal { Matrix, GameImpl }
 
 void testPositionAvailable() {
 	"   _ _ _
@@ -118,9 +118,9 @@ Matrix makeMatrix2() {
 		0 _ X
 	"
 	Matrix matrix = Matrix( [
-			[Position(unavailableBy_O), Position(unavailableBy_O), 	Position(available)],
-			[Position(available), 		Position(available), 		Position(unavailableBy_X)],
-			[Position(unavailableBy_O), Position(available), 		Position(unavailableBy_X)]
+			[unavailableBy_O, unavailableBy_O, 	available],
+			[available, 	  available, 		unavailableBy_X],
+			[unavailableBy_O, available, 		unavailableBy_X]
 	]);
 	return matrix;
 }
@@ -131,9 +131,9 @@ Matrix makeMatrix3() {
 	   X 0 X
 	"
 	Matrix matrix = Matrix([
-		[Position(unavailableBy_X), Position(unavailableBy_X), 	Position(unavailableBy_O)],
-		[Position(unavailableBy_O), Position(unavailableBy_O), 	Position(unavailableBy_X)],
-		[Position(unavailableBy_X), Position(unavailableBy_O), 	Position(unavailableBy_X)]
+		[unavailableBy_X, unavailableBy_X, 	unavailableBy_O],
+		[unavailableBy_O, unavailableBy_O, 	unavailableBy_X],
+		[unavailableBy_X, unavailableBy_O, 	unavailableBy_X]
 	]);
 	return matrix;
 }

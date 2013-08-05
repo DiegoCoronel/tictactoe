@@ -1,31 +1,16 @@
 import tictactoe { Availability, available, Choice }
 
-"Workaround: https://github.com/ceylon/ceylon-compiler/issues/1225"
-shared class Position( availability ) {
-
-	"Mantem a informação de ocupação de uma posição"
-	shared Availability availability; 
-
-	"São iguais se forem ocupados pelo mesmo contrato [[Availability]]"
-	shared actual Boolean equals( Object other ) {
-		if( is Position other ) {
-			return other.availability == availability;
-		}
-		return false;
-	}
-}
-
 "Representação do tabuleiro"
 shared alias Board => [
-	[Position, Position, Position],
-	[Position, Position, Position],
-	[Position, Position, Position]
+	[Availability, Availability, Availability],
+	[Availability, Availability, Availability],
+	[Availability, Availability, Availability]
 ];
 
 "Representa o tabuleiro inicial"
-Board newBoard = [	[Position(available), Position(available), Position(available)], 
-					[Position(available), Position(available), Position(available)],
-					[Position(available), Position(available), Position(available)]];
+Board newBoard = [	[available, available, available], 
+					[available, available, available],
+					[available, available, available]];
 
 "Representa o tabuleiro do jogo com suas devidas marcações.
  
@@ -42,14 +27,14 @@ shared class Matrix(board = newBoard ) {
 	
 	"Marca uma opção que com a disponibilidade especificada"
 	shared void mark(Choice choice, Availability availability) {
-		value newLine = makeNewLine(board, choice, Position(availability));
+		value newLine = makeNewLine(board, choice, availability);
 		board = makeNewBoard(board, choice, newLine);
 	}
 	
 	"Retorna verdadeiro caso a posição solicitada esteja como _available_"
 	shared Boolean isAvailable(Choice choice) { 
 		if( exists currentLine = board[choice.line], exists currentColumn = currentLine[choice.column],
-		    currentColumn.availability == available ) {
+		    currentColumn == available ) {
 			 return true;
 		}
 
@@ -61,7 +46,7 @@ shared class Matrix(board = newBoard ) {
 		return [
 			for( i in 0..2 ) 
 				for( j in 0..2 )
-					if( exists line = board[i], exists column = line[j], column.availability == available)
+					if( exists line = board[i], exists column = line[j], column == available)
 						Choice(i,j)
 		];
 	}
