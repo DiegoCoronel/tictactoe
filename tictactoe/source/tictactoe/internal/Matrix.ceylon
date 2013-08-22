@@ -1,16 +1,30 @@
 import tictactoe { Availability, available, Choice }
 
+"Tuplas são imutaveis, entao a melhor forma é alterar o valor interno de uma classe"
+shared class Ref(availability = available) {
+
+    shared variable Availability availability;
+
+    shared actual Boolean equals( Object other ) {
+        if( is Ref other ) {
+            return availability == other.availability;
+        }
+        return false;
+    }
+
+}
+
 "Representação do tabuleiro"
 shared alias Board => [
-	[Availability, Availability, Availability],
-	[Availability, Availability, Availability],
-	[Availability, Availability, Availability]
+	[Ref, Ref, Ref],
+	[Ref, Ref, Ref],
+	[Ref, Ref, Ref]
 ];
 
 "Representa o tabuleiro inicial"
-Board newBoard = [	[available, available, available], 
-					[available, available, available],
-					[available, available, available]];
+Board newBoard = [	[Ref(), Ref(), Ref()], 
+					[Ref(), Ref(), Ref()],
+					[Ref(), Ref(), Ref()]];
 
 "Representa o tabuleiro do jogo com suas devidas marcações.
  
@@ -27,14 +41,15 @@ shared class Matrix(board = newBoard ) {
 	
 	"Marca uma opção que com a disponibilidade especificada"
 	shared void mark(Choice choice, Availability availability) {
-		value newLine = makeNewLine(board, choice, availability);
-		board = makeNewBoard(board, choice, newLine);
+		assert(exists line = board[choice.line]);
+        assert(exists element = line.get(choice.column));
+		element.availability = availability;
 	}
 	
 	"Retorna verdadeiro caso a posição solicitada esteja como _available_"
 	shared Boolean isAvailable(Choice choice) { 
 		if( exists currentLine = board[choice.line], exists currentColumn = currentLine[choice.column],
-		    currentColumn == available ) {
+		    currentColumn.availability == available ) {
 			 return true;
 		}
 
@@ -46,7 +61,7 @@ shared class Matrix(board = newBoard ) {
 		return [
 			for( i in 0..2 ) 
 				for( j in 0..2 )
-					if( exists line = board[i], exists column = line[j], column == available)
+					if( exists line = board[i], exists column = line[j], column.availability == available)
 						Choice(i,j)
 		];
 	}
