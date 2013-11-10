@@ -1,1 +1,1 @@
-module tictactoe '1.0.0' {}
+module tictactoe "1.0.0" {}
