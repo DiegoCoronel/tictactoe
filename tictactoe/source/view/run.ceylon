@@ -5,7 +5,7 @@ import view.controller { controller }
 void run() {
  
  	value view = ViewBoard();
- 	view.init(controller);
+ 	view.setOnClickListener(controller.onClick);
  
  	controller.view = view;
     

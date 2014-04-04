@@ -1,10 +1,10 @@
 import tictactoe { newGame, Game, Choice, running, wonBy_O, wonBy_X, draw }
-import view { OnClickListener, View }
+import view { View }
 
 "Intermedio entre a view e as regras de negócio
  Este controlador é feito apenas para rodar o jogo uma única vez."
  by("Diego Coronel")
-shared object controller satisfies OnClickListener {
+shared object controller {
 
 	Game game = newGame();
 
@@ -13,7 +13,7 @@ shared object controller satisfies OnClickListener {
 
 	shared late View view;
 	
-	shared actual void onClick(Choice choice) {
+	shared void onClick(Choice choice) {
 		if( count % 2 == 0 ) {
 			game.markAs_X(choice);
 			view.setUserChoice(choice, "X");

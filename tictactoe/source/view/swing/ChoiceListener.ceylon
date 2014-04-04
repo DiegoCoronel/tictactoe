@@ -1,14 +1,14 @@
 import java.awt.event { ActionEvent, ActionListener }
 import tictactoe { Choice }
-import view { OnClickListener }
 
-shared class ChoiceListener(button, event) satisfies ActionListener {
+shared class ChoiceListener(button, onClick) satisfies ActionListener {
 
 	Button button;
-	OnClickListener event;
+	Anything onClick(Choice choice);
+	//OnClickListener event;
 	
 	shared actual void actionPerformed(ActionEvent e) {
-		event.onClick(Choice(button.line, button.column));
+		onClick(Choice(button.line, button.column));
 	}
 	
 	

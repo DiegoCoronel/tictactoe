@@ -1,8 +1,8 @@
-import ceylon.test { assertEquals, fail, assertTrue }
+import ceylon.test { assertEquals, fail, assertTrue, test }
 import tictactoe { Game, Choice, available, unavailableBy_O, unavailableBy_X, wonBy_X, wonBy_O, newGame, draw }
 import tictactoe.internal { Matrix, GameImpl, Ref }
 
-void testPositionAvailable() {
+test void testPositionAvailable() {
 	"   _ _ _
 		_ _ _
 		_ _ _
@@ -106,7 +106,7 @@ void testMarkSamePosition() {
 	try {
 		game.markAs_O(Choice(0,0));
 		fail("Não deve permitir escolher uma opção indisponível");
-	} catch( AssertionException e ) {
+	} catch( AssertionError e ) {
 		assertTrue(true);
 	}
 

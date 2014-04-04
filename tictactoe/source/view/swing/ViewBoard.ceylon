@@ -2,14 +2,14 @@ import javax.swing { JFrame { exitOnClose = \iEXIT_ON_CLOSE }, JOptionPane }
 import tictactoe { Choice }
 import java.awt { GridLayout, Dimension, Toolkit { defaultToolkit = defaultToolkit} }
 import ceylon.collection { LinkedList }
-import view { OnClickListener, View }
+import view { View }
 
 "Implementação da view"
 shared class ViewBoard() extends JFrame("TicTacToe") satisfies View {
 
 	LinkedList<Button> buttons = LinkedList<Button>(); 
 
-	shared void init(OnClickListener onClickListener) {
+	shared void setOnClickListener(Anything onClick(Choice choice)) {
 		setSize(300, 300);
 		contentPane.layout = GridLayout(3, 2);
 		
@@ -18,7 +18,7 @@ shared class ViewBoard() extends JFrame("TicTacToe") satisfies View {
 				Button button = Button(i, j);
 				button.withCustomFont();
 				
-				button.addActionListener(ChoiceListener(button, onClickListener));
+				button.addActionListener(ChoiceListener(button, onClick));
 				contentPane.add(button);
 				buttons.add(button);
 			}	
