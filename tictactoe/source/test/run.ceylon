@@ -17,7 +17,7 @@ test void testPositionAvailable() {
 		line = 0; 
 	};
 	
-	assertEquals(true, game.isAvailable( choice ));
+	assertEquals(true, game.available( choice ));
 }
 
 void testPositionUnavailable() {
@@ -31,7 +31,7 @@ void testPositionUnavailable() {
 		line = 0; 
 	};
 	
-	assertEquals(false, game.isAvailable( choice ));
+	assertEquals(false, game.available( choice ));
 }
 
 void testNoAvailables() {
@@ -40,7 +40,7 @@ void testNoAvailables() {
 
 	//Com a implementacao do conceito de _friend_ somente o modulo de teste vai ter acesso a esta implementacao.
 	Game game = GameImpl( matrix );
-	assertEquals(empty, game.getAvailables());
+	assertEquals(empty, game.availables());
 }
 
 void testMatrix2Availables() {
@@ -49,7 +49,7 @@ void testMatrix2Availables() {
 	//Com a implementacao do conceito de _friend_ somente o modulo de teste vai ter acesso a esta implementacao.
 	Game game = GameImpl( matrix );
 	value availables = [Choice(0,2), Choice(1,0), Choice(1,1), Choice(2,1)] ;
-	assertEquals(availables, game.getAvailables());
+	assertEquals(availables, game.availables());
 }
 
 void testPlayerXWon() {
@@ -60,7 +60,7 @@ void testPlayerXWon() {
 
 	game.markAs_X(Choice(0,2));
 
-	assertEquals(wonBy_X, game.getStatus());
+	assertEquals(wonBy_X, game.status());
 }
 
 void testPlayerOWon() {
@@ -71,7 +71,7 @@ void testPlayerOWon() {
 
 	game.markAs_O(Choice(0,2));
 
-	assertEquals(wonBy_O, game.getStatus());
+	assertEquals(wonBy_O, game.status());
 }
 
 "Bug encontrado enquanto tentava fazer a tela em Swing"
@@ -91,7 +91,7 @@ void testMarkFull() {
 	game.markAs_O(Choice(0,2));
 	game.markAs_X(Choice(2,2));
 
-	assertEquals(draw, game.getStatus());
+	assertEquals(draw, game.status());
 }
 
 void testMarkSamePosition() {

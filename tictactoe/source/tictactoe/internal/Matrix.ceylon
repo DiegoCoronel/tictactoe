@@ -58,6 +58,12 @@ shared class Matrix(board = newBoard ) {
 	
 	"Retorna todas as escolhas disponíveis"
 	shared [Choice*] getAvailables() {
+		board.each(void (Ref[3]|Ref[3]|Ref[3] colunms) {
+			colunms.each(void (Ref element) {
+				
+			});
+		});
+		
 		return [
 			for( i in 0..2 ) 
 				for( j in 0..2 )

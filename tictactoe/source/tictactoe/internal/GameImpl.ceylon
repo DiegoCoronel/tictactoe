@@ -9,13 +9,13 @@ shared class GameImpl( matrix = Matrix() ) satisfies Game {
 	"Todo jogo começa com estado 'running' que deve ser modificado
 	 para os demais estados conforme as regras de vitória ou empate.
 	 Após ser modificado o estado o jogo não pode mais ser manipulado."
-	variable Status status = running;
+	variable Status status_ = running;
 
-	shared actual Boolean isAvailable(Choice choice) {
+	shared actual Boolean available(Choice choice) {
 		return matrix.isAvailable( choice );
 	}
 	
-	shared actual [Choice*] getAvailables() { 
+	shared actual [Choice*] availables() { 
 		return matrix.getAvailables(); 
 	}
 	
@@ -30,7 +30,7 @@ shared class GameImpl( matrix = Matrix() ) satisfies Game {
 	"Marca no tabuleiro a escolha do jogado se a mesma estiver disponível"
 	void mark(Choice choice, Availability player) {
 	    "Apenas escolhas disponíveis são aceitas. E mesmo assim se o jogo estiver me andamento."
-		assert( isAvailable(choice), status == running );
+		assert( available(choice), status == running );
 		
 		matrix.mark(choice, player);
         
@@ -41,18 +41,18 @@ shared class GameImpl( matrix = Matrix() ) satisfies Game {
 	void updateStatus( Availability lastPlayed ) {
 		for( line in getVictoryRules() ) {
 			if( {Ref(lastPlayed)}.containsEvery(line) ) {
-				status = lastPlayed == unavailableBy_O then wonBy_O else wonBy_X;
+				status_ = lastPlayed == unavailableBy_O then wonBy_O else wonBy_X;
 				break;
 			}
 		} else {
 			//Quando não cair no break do for entra neste else
-			if( is Empty availables = getAvailables() ) {
-				status = draw;
+			if( is Empty availables = availables() ) {
+				status_ = draw;
 			}		
 		}
 	}
 
-	shared actual Status getStatus() => status;
+	shared actual Status status() => status_;
 
 	"Regras do jogo, determina as condições de vitória"
 	[[Ref, Ref, Ref]*] getVictoryRules() {

@@ -28,7 +28,7 @@ shared object controller {
 	
 	suppressWarnings("expressionTypeNothing")
 	void checkEndGame() {
-		switch(game.getStatus())
+		switch(game.status())
 		case( running ) {}
 		case( wonBy_O ) {
 			view.showMessage( "Jogo vencido por 'O' " );

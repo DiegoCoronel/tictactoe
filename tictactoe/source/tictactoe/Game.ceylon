@@ -10,10 +10,10 @@ by("Diego Coronel")
 shared interface Game {
 	
 	"Verifica se a escolha encontra-se disponível"
-	shared formal Boolean isAvailable(Choice choice);
+	shared formal Boolean available(Choice choice);
 	
 	"Recuperar todas as posições que ainda estão disponíveis"
-	shared formal [Choice*] getAvailables();
+	shared formal [Choice*] availables();
 	
 	"Marca uma posição para o jogado _X_"
 	shared formal void markAs_X( Choice choice );
@@ -22,7 +22,7 @@ shared interface Game {
 	shared formal void markAs_O( Choice choice );
 
     "Retorna o estado corrente do jogo"
-	shared formal Status getStatus();
+	shared formal Status status();
 }
 
 "Retorna uma instância para um novo jogo"
