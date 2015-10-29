@@ -8,8 +8,7 @@ shared class Button(line, column) extends JButton() {
 
 		
 	shared void withCustomFont() {
-		Font fontCustomized = Font("Arial", plain, 48);
-		this.font = fontCustomized;
+		this.font = Font("Arial", plain, 48);
 	}
 
 }

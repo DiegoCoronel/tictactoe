@@ -3,7 +3,7 @@ import view { View }
 
 "Intermedio entre a view e as regras de negócio
  Este controlador é feito apenas para rodar o jogo uma única vez."
- by("Diego Coronel")
+by("Diego Coronel")
 shared object controller {
 
 	Game game = newGame();
@@ -26,6 +26,7 @@ shared object controller {
 		checkEndGame();
 	}
 	
+	suppressWarnings("expressionTypeNothing")
 	void checkEndGame() {
 		switch(game.getStatus())
 		case( running ) {}
